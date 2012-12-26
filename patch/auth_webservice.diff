@@ -1,0 +1,14 @@
+diff --git a/auth/webservice/auth.php b/auth/webservice/auth.php
+index 15a7598..91ecb2f 100644
+--- a/auth/webservice/auth.php
++++ b/auth/webservice/auth.php
+@@ -68,6 +68,9 @@ class auth_plugin_webservice extends auth_plugin_base {
+         global $CFG, $DB;
+         // special web service login
+         if ($user = $DB->get_record('user', array('username'=>$username, 'mnethostid'=>$CFG->mnet_localhost_id))) {
++            if ($user->auth == 'drupalconnect') {
++                return drupalconnect_check($username, $password);
++            }
+             return validate_internal_user_password($user, $password);
+         }
+         return false;

@@ -1,0 +1,55 @@
+<?php
+
+    global $CFG;
+
+    // Set to defaults if undefined
+
+    if (!isset ($config->nodeid)) {
+        $config->nodeid = '';
+    }
+    if (!isset ($config->serviceurl)) {
+        $config->serviceurl = '';
+    }
+
+
+?>
+
+<div style="text-align: center"><?php print_string('drupalconnect', "auth_drupalconnect"); ?></div>
+
+<table cellspacing="0" cellpadding="5" border="0">
+
+<tr valign="top" class="required">
+    <td align="right"><?php print_string("serviceurl", "auth_drupalconnect") ?>:</td>
+    <td>
+        <input name="serviceurl" type="text" size="60" value="<?php echo $config->serviceurl ?>" />
+    </td>
+    <td><?php print_string("serviceurl_desc", "auth_drupalconnect") ?></td>
+</tr>
+    <tr valign="top" class="required">
+    <td align="right"><?php print_string("nodeidsetting", "auth_drupalconnect") ?>:</td>
+    <td>
+        <input name="nodeid" type="text" size="12" value="<?php echo $config->nodeid ?>" />
+    </td>
+    <td><?php print_string("nodeidsetting_desc", "auth_drupalconnect") ?></td>
+</tr>
+
+<tr valign="top">
+    <td align="right"><?php print_string("secureswitch", "auth_drupalconnect") ?>:</td>
+    <td>
+        <input name="secureswitch" type="checkbox" <?php
+        if ( isset($config->secureswitch) and $config->secureswitch == 'on' ){
+                echo 'checked="checked"';
+            }
+        ?> />
+    </td>
+    <td><?php print_string("secureswitch_desc", "auth_drupalconnect") ?></td>
+</tr>
+
+
+
+<?php
+
+ print_auth_lock_options('drupalconnect', $user_fields, get_string('auth_fieldlocks_help', 'auth'), false, false);
+//print_auth_lock_options('drupalconnect', $user_fields, '<!-- empty help -->', true, false);
+?>
+</table>
