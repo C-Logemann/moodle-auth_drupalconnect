@@ -69,6 +69,7 @@ class auth_plugin_webservice extends auth_plugin_base {
         // special web service login
         if ($user = $DB->get_record('user', array('username'=>$username, 'mnethostid'=>$CFG->mnet_localhost_id))) {
             if ($user->auth == 'drupalconnect') {
+                require_once($CFG->dirroot.'/auth/drupalconnect/drupal.inc');
                 return drupalconnect_check($username, $password);
             }
             return validate_internal_user_password($user, $password);
